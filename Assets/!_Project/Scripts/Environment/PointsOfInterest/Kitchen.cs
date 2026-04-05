@@ -5,7 +5,7 @@ public class Kitchen : MonoBehaviour
 {
     [SerializeField] private Shop _shop;
 
-    [SerializeField] private float _cookingTime = 20f;
+    [SerializeField] private float _cookingTime = 4.5f;
     [SerializeField] private int _cookingPollution = 5;
 
     [SerializeField] private int _maxFood = 5;
@@ -17,8 +17,15 @@ public class Kitchen : MonoBehaviour
         StartCoroutine(CookingProcess(_cookingTime));
     }
 
+    public void TryCook()
+    {
+        Cook();
+        StartCoroutine(CookingProcess(_cookingTime));
+    }
+
     private void Cook()
     {
+        Debug.Log("Cooking");
         if (_currentFood >= _maxFood)
         {
             return;
@@ -35,12 +42,11 @@ public class Kitchen : MonoBehaviour
         {
             GameInfo.AddPollution(_cookingPollution);
         }
-        StartCoroutine(CookingProcess(_cookingTime));
     }
 
     private IEnumerator CookingProcess(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Cook();
+        TryCook();
     }
 }

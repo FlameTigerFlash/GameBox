@@ -15,7 +15,7 @@ public class WasteManagementSystem : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(TruckCooldown(_truckCooldown));
-        StartCoroutine(PollutionDecreaseCooldown(_pollutionDecreaseAmount));
+        StartCoroutine(PollutionDecreaseCooldown(_pollutionDecreaseTime));
     }
 
     public void Stop()
@@ -42,7 +42,7 @@ public class WasteManagementSystem : MonoBehaviour
     private void DecreasePollution()
     {
         GameInfo.SubtractPollution(_pollutionDecreaseAmount);
-        StartCoroutine(PollutionDecreaseCooldown(_pollutionDecreaseAmount));
+        StartCoroutine(PollutionDecreaseCooldown(_pollutionDecreaseTime));
     }
 
     private IEnumerator TruckCooldown(float delay)

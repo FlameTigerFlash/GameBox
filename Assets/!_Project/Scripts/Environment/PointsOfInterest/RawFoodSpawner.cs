@@ -37,6 +37,7 @@ public class FoodSpawner : MonoBehaviour
         {
             SpawnFood();
         }
+        StartCoroutine(Cooldown(_cooldown));
     }
 
     private void SpawnFood()
@@ -47,8 +48,6 @@ public class FoodSpawner : MonoBehaviour
             Random.Range(_center.position.z - _scale.z, _center.position.z + _scale.z));
 
         Instantiate(_foodPrefab, position, Quaternion.identity, GameInfo.Items != null? GameInfo.Items : transform);
-
-        StartCoroutine(Cooldown(_cooldown));
     }
 
     private IEnumerator Cooldown(float delay)

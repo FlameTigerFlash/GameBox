@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Decompose
   _delay: 30
-  _pollutionAmount: 10
+  _pollutionAmount: 35
 --- !u!114 &5072319240001963012
 MonoBehaviour:
   m_ObjectHideFlags: 0

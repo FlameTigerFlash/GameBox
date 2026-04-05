@@ -11,13 +11,11 @@ public class WaitNearBenchState : BaseCustomerState
     }
     public override void EnterState()
     {
-        //Debug.Log("Wait near bench state entered.");
         _controller.StartCoroutine(Cooldown(5f));
     }
 
     public override void ExitState()
     {
-        //Debug.Log("Wait near bench state exited.");
     }
 
     public override void Execute()

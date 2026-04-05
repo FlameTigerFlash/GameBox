@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LookRotate _lookRotate;
     [SerializeField] private PlayerInteract _playerInteract;
 
+    [SerializeField] private SceneLoader _sceneManager;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,5 +60,12 @@ public class PlayerController : MonoBehaviour
         {
             _playerInteract.TryDrop();
         }
+    }
+
+    public void OnQuit(InputAction.CallbackContext context)
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        _sceneManager.OnMainMenu();
     }
 }

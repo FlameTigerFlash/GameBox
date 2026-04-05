@@ -26,7 +26,6 @@ public class LeaveState : BaseCustomerState
 
     public override void EnterState()
     {
-        //Debug.Log("Leave state entered.");
         _destination = _mapLocator.Exit.Locate().position;
         _navigator.SetDestination(_destination);
         if (_holdAbility.HeldObject != null)
@@ -37,7 +36,6 @@ public class LeaveState : BaseCustomerState
 
     public override void ExitState()
     {
-        //Debug.Log("Leave state exited.");
     }
 
     public override void Execute()
@@ -61,7 +59,9 @@ public class LeaveState : BaseCustomerState
         GameObject waste = _wasteHandler.SpawnWaste(_holdAbility.HoldPoint);
         _holdAbility.TryPickUp(waste);
 
-        if (GameInfo.IsWasteBinBuilt || GameInfo.IsSortingBinBuilt)
+        float type = Random.Range(0f, 1f);
+
+        if (GameInfo.IsWasteBinBuilt || (GameInfo.IsSortingBinBuilt && type>0.5f))
         {
             _controller.OnChangeState(StateName.GO_TO_WASTE_BIN);
             waste.GetComponent<Decompose>().StopDecomposition();

@@ -75,7 +75,6 @@ public class CustomerController : BaseController
 
     public void OnFinishJourney()
     {
-        Debug.Log("Customer has left");
         Destroy(gameObject);
     }
 

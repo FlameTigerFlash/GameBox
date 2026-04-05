@@ -39,6 +39,7 @@ public class StatsMonitor : MonoBehaviour
     {
         _moneyDisplay.Display(GameInfo.Money);
         _pollutionDisplay.Display(GameInfo.Pollution);
+        HandleEnvironmentPollution();
     }
 
     private void HandleEnvironmentPollution()

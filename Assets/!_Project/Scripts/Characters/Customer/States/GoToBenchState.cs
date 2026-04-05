@@ -12,13 +12,11 @@ public class GoToBenchState : BaseCustomerState
         {
             Finish();
         }
-        //Debug.Log("Go to bench state entered.");
         _controller.Navigator.SetDestination(_controller.MapLocator.Bench.Locate().position);
     }
 
     public override void ExitState()
     {
-        //Debug.Log("Go to bench state exited.");
     }
 
     public override void Execute()

@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.Port;
 
 public abstract class BaseWasteBin : PointOfInterest
 {

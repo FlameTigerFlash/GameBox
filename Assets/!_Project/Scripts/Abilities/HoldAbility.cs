@@ -3,12 +3,17 @@ using UnityEngine;
 public class HoldAbility : MonoBehaviour
 {
     [SerializeField] private Transform _holdPoint;
+    [SerializeField] private Transform _lookPoint;
+
+    [SerializeField] private LayerMask _layerMask;
 
     [SerializeField] private float _maxThrowingStrength = 2f;
     [SerializeField] private float _holdStrength = 100f;
     [SerializeField] private float _damping = 100f;
     [SerializeField] private float _maxForce = 200f;
     [SerializeField] private float _maxDistance = float.MaxValue;
+
+    [SerializeField] private bool _requireDirectContact = false;
 
     public GameObject HeldObject { get; private set; }
     public Transform HoldPoint => _holdPoint;
@@ -58,6 +63,18 @@ public class HoldAbility : MonoBehaviour
             return;
         }
 
+        if (Vector3.Distance(_holdPoint.position, HeldObject.transform.position) > _maxDistance)
+        {
+            Drop();
+            return;
+        }
+
+        if (_requireDirectContact && !CheckDirectContact())
+        {
+            Drop();
+            return;
+        }
+
         Vector3 displacement = _holdPoint.position - _transportableRb.position;
         Vector3 springForce = displacement * _holdStrength;
         Vector3 dampingForce = -_transportableRb.linearVelocity * _damping;
@@ -66,5 +83,15 @@ public class HoldAbility : MonoBehaviour
         totalForce = Vector3.ClampMagnitude(totalForce, _maxForce);
 
         _transportableRb.AddForce(totalForce, ForceMode.Force);
+    }
+
+    private bool CheckDirectContact()
+    {
+        bool contact = Physics.Raycast(_lookPoint.position, HeldObject.transform.position - _lookPoint.position, out var hit, _maxDistance, _layerMask, QueryTriggerInteraction.Collide);
+        if (contact && (hit.collider.gameObject != HeldObject.gameObject))
+        {
+            return false;
+        }
+        return true;
     }
 }

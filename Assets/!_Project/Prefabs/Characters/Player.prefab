@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 6908270769602502962}
   - component: {fileID: 4539151685310375609}
   - component: {fileID: 7543281657983164090}
+  - component: {fileID: 2053237143652303320}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -456,13 +457,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
   _camera: {fileID: 5365517934189824526}
   _playerDisplay: {fileID: 7543281657983164090}
+  _holdAbility: {fileID: 2053237143652303320}
   _layerMask:
     serializedVersion: 2
     m_Bits: 183
-  _holdPoint: {fileID: 1270708587711020302}
-  _springStrength: 80
-  _damping: 5
-  _maxForce: 160
   interactDistance: 3
 --- !u!114 &7543281657983164090
 MonoBehaviour:
@@ -477,6 +475,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDisplay
   _midTextField: {fileID: 0}
+--- !u!114 &2053237143652303320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2239287869713110188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37e249a1a49f9549a9134bb3839f51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoldAbility
+  _holdPoint: {fileID: 1270708587711020302}
+  _lookPoint: {fileID: 1958907199804836702}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 129
+  _maxThrowingStrength: 2
+  _holdStrength: 200
+  _damping: 40
+  _maxForce: 600
+  _maxDistance: 5
+  _requireDirectContact: 1
 --- !u!1 &5311552673345579475
 GameObject:
   m_ObjectHideFlags: 0

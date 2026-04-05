@@ -12,7 +12,24 @@ public class GoToWasteBinState : BaseCustomerState
 
     public override void EnterState()
     {
-        //Debug.Log("Go to waste bin state entered.");
+        ChooseDestination();
+    }
+
+    public override void Execute()
+    {
+        if (Vector3.Distance(_controller.transform.position, _targetWasteBin.Locate().position) <= 1f)
+        {
+            _holdAbility.Drop();
+            _controller.OnChangeState(StateName.LEAVE);
+        }
+    }
+
+    public override void ExitState()
+    {
+    }
+
+    private void ChooseDestination()
+    {
         if (!GameInfo.IsWasteBinBuilt && !GameInfo.IsSortingBinBuilt)
         {
             _controller.OnChangeState(StateName.LEAVE);
@@ -25,6 +42,10 @@ public class GoToWasteBinState : BaseCustomerState
             if (!GameInfo.IsWasteBinBuilt)
             {
                 _controller.OnChangeState(StateName.LEAVE);
+                if (_holdAbility.HeldObject != null)
+                {
+                    _holdAbility.Drop();
+                }
                 return;
             }
             _targetWasteBin = _controller.MapLocator.WasteBin;
@@ -50,19 +71,5 @@ public class GoToWasteBinState : BaseCustomerState
         {
             _controller.Navigator.SetDestination(_targetWasteBin.Locate().position);
         }
-    }
-
-    public override void Execute()
-    {
-        if (Vector3.Distance(_controller.transform.position, _targetWasteBin.Locate().position) <= 1f)
-        {
-            _holdAbility.Drop();
-            _controller.OnChangeState(StateName.LEAVE);
-        }
-    }
-
-    public override void ExitState()
-    {
-        //Debug.Log("Go to waste bin state exited.");
     }
 }

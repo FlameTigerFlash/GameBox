@@ -13,12 +13,10 @@ public class WaitForFoodState : BaseCustomerState
     }
     public override void EnterState()
     {
-        //Debug.Log("Wait for food state entered.");
     }
 
     public override void ExitState()
     {
-        //Debug.Log("Wait for food state exited.");
     }
 
     public override void Execute()
